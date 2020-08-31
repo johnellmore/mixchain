@@ -1,0 +1,16 @@
+{
+  "name": "mixchain",
+  "version": "0.1.0",
+  "description": "",
+  "main": "chain.js",
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^4.0.2"
+  },
+  "scripts": {
+    "example": "tsc",
+    "test": "npm test"
+  },
+  "author": "John Ellmore",
+  "license": "MIT"
+}
