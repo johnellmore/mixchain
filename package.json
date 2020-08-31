@@ -8,8 +8,7 @@
     "typescript": "^4.0.2"
   },
   "scripts": {
-    "example": "tsc",
-    "test": "npm test"
+    "test": "echo \"Nope\""
   },
   "author": "John Ellmore",
   "license": "MIT"
