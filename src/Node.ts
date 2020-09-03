@@ -1,3 +1,3 @@
 export default class Node {
-    private node: AudioNode;
+  private node: AudioNode;
 }

@@ -5,9 +5,14 @@
   "main": "chain.js",
   "dependencies": {},
   "devDependencies": {
+    "@rollup/plugin-typescript": "^5.0.2",
+    "prettier": "2.1.1",
+    "rollup": "^2.26.9",
+    "tslib": "^2.0.1",
     "typescript": "^4.0.2"
   },
   "scripts": {
+    "build": "rollup -c",
     "test": "echo \"Nope\""
   },
   "author": "John Ellmore",
