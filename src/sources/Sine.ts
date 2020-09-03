@@ -16,5 +16,6 @@ export class Sine extends ChainNode {
     this.node = engine.audioContext.createOscillator();
     this.node.type = "sine";
     this.node.frequency.value = freq.hertz();
+    this.node.start();
   }
 }

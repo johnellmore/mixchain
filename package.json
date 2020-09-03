@@ -13,7 +13,8 @@
   },
   "scripts": {
     "build": "rollup -c",
-    "test": "echo \"Nope\""
+    "test": "echo \"Nope\"",
+    "watch": "rollup -w -c"
   },
   "author": "John Ellmore",
   "license": "MIT",
