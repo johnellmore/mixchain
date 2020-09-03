@@ -16,5 +16,6 @@
     "test": "echo \"Nope\""
   },
   "author": "John Ellmore",
-  "license": "MIT"
+  "license": "MIT",
+  "prettier": {}
 }
