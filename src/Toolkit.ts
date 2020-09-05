@@ -1,3 +1,4 @@
+import { pipe } from "src/pipe";
 import { Engine } from "src/engine";
 import { sineFactory } from "src/sources/Sine";
 import { gainFactory } from "src/volume/Gain";
@@ -9,6 +10,10 @@ export default class Toolkit {
 
   constructor(engine: Engine) {
     this.engine = engine;
+  }
+
+  get pipe() {
+    return pipe;
   }
 
   get sine() {
