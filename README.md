@@ -3,7 +3,8 @@
 Mixchain is an **experimental** declarative format for defining an audio effects chain in TypeScript/JavaScript. A Mixchain config looks like this:
 
 ```js
-const singer = input(0).pipe(
+const singer = pipe(
+    input(0),
     gain(dB(20)),
     noiseGate(dB(-40), ms(10), ms(100), ms(40)), // thres, attack, hold, release
     highPassFilter(Hz(300)),
@@ -11,7 +12,8 @@ const singer = input(0).pipe(
     gain(dB(15))
 );
 
-const guitar = input(1).pipe(
+const guitar = pipe(
+    input(1)
     gain(dB(10))
     noiseGate(dB(-30), ms(10), ms(100), ms(40)),
 );
@@ -57,12 +59,12 @@ const inEarMix = mix(
 Or a simple setup for a panel of speakers at a conference:
 
 ```js
-const speakerGate = () => noiseGate(dB(-20), ms(50), ms(2000), ms(1000));
+const makeSpeakerGate = () => noiseGate(dB(-20), ms(50), ms(2000), ms(1000));
 
-const jeanLuc = input(0).pipe(speakerGate());
-const will = input(1).pipe(speakerGate());
-const data = input(2).pipe(speakerGate());
-const geordi = input(0).pipe(speakerGate());
+const jeanLuc = pipe(input(0), makeSpeakerGate());
+const will = pipe(input(1), makeSpeakerGate());
+const data = pipe(input(2), makeSpeakerGate());
+const geordi = pipe(input(0), makeSpeakerGate());
 
 const main = mix(jeanLuc, will, data, geordi)
 ```
@@ -71,7 +73,8 @@ Or even rudimentary effects:
 
 ```js
 const voice = input(0);
-const echo = voice.pipe(
+const echo = pipe(
+    voice,
     delay(ms(1000)),
     gain(dB(-6)),
 );
