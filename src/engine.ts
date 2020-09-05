@@ -21,8 +21,17 @@ export default function engine(setup: setupCallback): Engine {
 
 export class Engine {
   readonly audioContext: AudioContext;
+  private _nodes: ChainNode[] = [];
 
   constructor() {
     this.audioContext = new AudioContext();
+  }
+
+  register(node: ChainNode) {
+    this.nodes.push(node);
+  }
+
+  get nodes(): ChainNode[] {
+    return this._nodes;
   }
 }
