@@ -1,21 +1,30 @@
 import engine from "src/engine";
 import { dB, Hz, ms } from "src/units";
+import EngineNodeControls from "./EngineNodeControls";
+import { render } from "preact";
+import { html } from "htm/preact";
 
 const eng = engine((tools) => {
-  const { sine, gain, mix, noiseGate } = tools;
+  const { pipe, sine, gain, mix, noiseGate } = tools;
 
-  const lowSignal = sine(Hz(300)).pipe(
+  const lowSignal = pipe(
+    sine(Hz(300)),
     noiseGate(dB(-30), ms(10), ms(100), ms(40)), // thres, attack, hold, release
     // highPassFilter(300), // HPF filter at 300Hz
     // compressor(-20, 0.25), // compress anything above -20dB at a 4:1 ratio
-    gain(dB(-3)) // drop volume by -15dB
+    gain(dB(-3)), // drop volume by -15dB
   );
 
-  const highSignal = sine(Hz(800)).pipe(
+  const highSignal = pipe(
+    sine(Hz(800)),
     // highPassFilter(300), // HPF filter at 300Hz
     // compressor(-20, 0.25), // compress anything above -20dB at a 4:1 ratio
-    gain(dB(-15)) // drop volume by -15dB
+    gain(dB(-5)), // drop volume by -15dB
   );
 
-  return mix(lowSignal, highSignal);
+  return pipe(mix(lowSignal, highSignal), gain(dB(-20)));
 });
+
+// mount the engine to the root of the page
+const app = html`<${EngineNodeControls} engine=${eng} />`;
+render(app, document.body);
