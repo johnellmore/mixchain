@@ -1,6 +1,7 @@
 import { Engine } from "src/engine";
 import { SPL } from "src/units";
 import ChainNode from "src/ChainNode";
+import { Parameter, DecibelParameter } from "src/Parameter";
 
 export function gainFactory(engine) {
   return function (spl: SPL) {
@@ -12,8 +13,12 @@ export class Gain extends ChainNode {
   readonly node: GainNode;
 
   constructor(engine: Engine, spl: SPL) {
-    super();
+    super(engine);
     this.node = engine.audioContext.createGain();
-    this.node.gain.value = spl.coefficient();
+    this.node.gain.value = spl.unityCoefficient();
+  }
+
+  get params(): Parameter[] {
+    return [new DecibelParameter("Gain", this.node.gain)];
   }
 }

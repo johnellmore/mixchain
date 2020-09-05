@@ -1,11 +1,12 @@
 import { Engine } from "src/engine";
 import ChainNode from "src/ChainNode";
-import { Decibel } from "src/units/spl";
+import { SPL } from "src/units/spl";
 import { TimeInterval } from "src/units/time";
+import { Parameter } from "src/Parameter";
 
 export function noiseGateFactory(engine) {
   return function (
-    threshold: Decibel,
+    threshold: SPL,
     attack: TimeInterval,
     hold: TimeInterval,
     release: TimeInterval
@@ -19,13 +20,17 @@ export class NoiseGate extends ChainNode {
 
   constructor(
     engine: Engine,
-    threshold: Decibel,
+    threshold: SPL,
     attack: TimeInterval,
     hold: TimeInterval,
     release: TimeInterval
   ) {
-    super();
+    super(engine);
     this.node = engine.audioContext.createGain();
     // TODO implement noise gate
+  }
+
+  get params(): Parameter[] {
+    return [];
   }
 }
