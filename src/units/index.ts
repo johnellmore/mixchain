@@ -1,11 +1,11 @@
-import { SPL, dB, coefficient, Decibel, Coefficient } from "./spl";
+import { SPL, dB, unityCoefficient, Decibel, UnityCoefficient } from "./spl";
 import { Frequency, Hz, Hertz } from "./frequency";
 import { TimeInterval, ms, Seconds } from "./time";
 
 export {
   // helper functions for declaring values
   dB,
-  coefficient,
+  unityCoefficient,
   Hz,
   ms,
   // interfaces for accepting unit types
@@ -14,7 +14,7 @@ export {
   TimeInterval,
   // unit implementations
   Decibel,
-  Coefficient,
+  UnityCoefficient,
   Hertz,
   Seconds,
 };
