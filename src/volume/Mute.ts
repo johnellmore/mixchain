@@ -1,6 +1,6 @@
 import { Engine } from "src/engine";
 import ChainNode from "src/ChainNode";
-import { Parameter, DecibelParameter, ToggleParameter } from "src/parameters";
+import { Parameter, ToggleParameter } from "src/parameters/index";
 
 export function muteFactory(engine) {
   return function (muted: boolean) {

@@ -1,5 +1,5 @@
 import engine from "src/engine";
-import { dB, Hz, ms } from "src/units";
+import { dB, Hz, ms } from "src/units/index";
 import EngineNodeControls from "./EngineNodeControls";
 import { render } from "preact";
 import { html } from "htm/preact";

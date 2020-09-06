@@ -1,4 +1,12 @@
-import { Decibel, unityCoefficient, dB } from "src/units";
+import {
+  Decibel,
+  Hertz,
+  unityCoefficient,
+  dB,
+  Hz,
+  SPL,
+  Frequency,
+} from "src/units/index";
 
 export abstract class Parameter {
   readonly label: String;
@@ -19,12 +27,12 @@ export class DecibelParameter extends Parameter {
     this.param = param;
   }
 
-  get value(): number {
-    return unityCoefficient(this.param.value).decibels();
+  get value(): SPL {
+    return dB(unityCoefficient(this.param.value).decibels());
   }
 
-  set value(newValue: number) {
-    const newGain = dB(newValue).unityCoefficient();
+  set value(newValue: SPL) {
+    const newGain = newValue.unityCoefficient();
     this.param.value = newGain;
   }
 }
@@ -37,12 +45,12 @@ export class HertzParameter extends Parameter {
     this.param = param;
   }
 
-  get value(): number {
-    return this.param.value;
+  get value(): Frequency {
+    return Hz(this.param.value);
   }
 
-  set value(newValue: number) {
-    this.param.value = newValue;
+  set value(newValue: Frequency) {
+    this.param.value = newValue.hertz();
   }
 }
 

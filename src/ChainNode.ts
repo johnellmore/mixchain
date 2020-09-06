@@ -1,4 +1,4 @@
-import { Parameter } from "src/parameters";
+import { Parameter } from "src/parameters/index";
 
 export default abstract class ChainNode {
   readonly node: AudioNode;

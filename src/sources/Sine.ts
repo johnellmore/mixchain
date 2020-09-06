@@ -1,7 +1,7 @@
 import { Engine } from "src/engine";
-import { Frequency } from "src/units";
+import { Frequency } from "src/units/index";
 import ChainNode from "src/ChainNode";
-import { Parameter, HertzParameter } from "src/parameters";
+import { Parameter, HertzParameter } from "src/parameters/index";
 
 export function sineFactory(engine) {
   return function (freq: Frequency) {

@@ -1,6 +1,6 @@
 import { Engine } from "src/engine";
 import ChainNode from "src/ChainNode";
-import { Parameter } from "src/parameters";
+import { Parameter } from "src/parameters/index";
 
 export function mixFactory(engine) {
   return function (...sources: ChainNode[]) {

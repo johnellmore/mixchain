@@ -7,17 +7,18 @@ import {
   DecibelParameter,
   HertzParameter,
   ToggleParameter,
-} from "src/parameters";
+} from "src/parameters/index";
+import { dB, Hz } from "src/units/index";
 
 function DecibelControl(props) {
   const param = props.param as DecibelParameter;
-  const [decibelValue, setDecibelValue] = useState(param.value);
+  const [decibelValue, setDecibelValue] = useState(param.value.decibels());
 
   const handleChange = useCallback(
     (event) => {
       const input = event.target as HTMLInputElement;
       const db = parseFloat(input.value);
-      param.value = db;
+      param.value = dB(db);
       setDecibelValue(db);
     },
     [decibelValue]
@@ -59,17 +60,17 @@ function ToggleControl(props) {
 
 function HertzControl(props) {
   const [min, max] = [20, 20000];
-  const intervalToFreq = (pos) =>
+  const intervalToFreq = (pos: number) =>
     10 **
     ((Math.log10(max) - Math.log10(min)) * (pos / 1000) + Math.log10(min));
-  const freqToInterval = (freq) =>
+  const freqToInterval = (freq: number) =>
     ((Math.log10(freq) - Math.log10(min)) /
       (Math.log10(max) - Math.log10(min))) *
     1000;
 
-  const param = props.param as DecibelParameter;
+  const param = props.param as HertzParameter;
   const [intervalValue, setIntervalValue] = useState(
-    freqToInterval(param.value)
+    freqToInterval(param.value.hertz())
   );
 
   const handleChange = useCallback(
@@ -78,7 +79,7 @@ function HertzControl(props) {
       const intervalVal = parseFloat(input.value);
       setIntervalValue(intervalVal);
       const hz = intervalToFreq(intervalVal);
-      param.value = hz;
+      param.value = Hz(hz);
     },
     [intervalValue]
   );
@@ -105,7 +106,6 @@ class NodeControls extends Component {
     return html`
       <h2>${node.constructor.name}</h2>
       ${[...node.params.values()].map((param) => {
-        console.log(param);
         if (param.constructor === DecibelParameter) {
           return html`<${DecibelControl} param=${param} />`;
         } else if (param.constructor === HertzParameter) {
