@@ -2,17 +2,18 @@ import { Decibel, unityCoefficient, dB } from "src/units";
 
 export abstract class Parameter {
   readonly label: String;
-  readonly param: AudioParam;
 
-  constructor(label: String, param: AudioParam) {
+  constructor(label: String) {
     this.label = label;
-    this.param = param;
   }
 }
 
 export class DecibelParameter extends Parameter {
+  readonly param: AudioParam;
+
   constructor(label: String, param: AudioParam) {
-    super(label, param);
+    super(label);
+    this.param = param;
   }
 
   get value(): number {
@@ -26,8 +27,11 @@ export class DecibelParameter extends Parameter {
 }
 
 export class HertzParameter extends Parameter {
+  readonly param: AudioParam;
+
   constructor(label: String, param: AudioParam) {
-    super(label, param);
+    super(label);
+    this.param = param;
   }
 
   get value(): number {
@@ -36,5 +40,26 @@ export class HertzParameter extends Parameter {
 
   set value(newValue: number) {
     this.param.value = newValue;
+  }
+}
+
+type ToggleGetter = () => boolean;
+type ToggleSetter = (toggle: boolean) => void;
+export class ToggleParameter extends Parameter {
+  readonly getter: ToggleGetter;
+  readonly setter: ToggleSetter;
+
+  constructor(label: String, getter: ToggleGetter, setter: ToggleSetter) {
+    super(label);
+    this.getter = getter;
+    this.setter = setter;
+  }
+
+  get value(): boolean {
+    return this.getter();
+  }
+
+  set value(newValue: boolean) {
+    this.setter(newValue);
   }
 }

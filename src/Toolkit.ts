@@ -2,6 +2,7 @@ import { pipe } from "src/pipe";
 import { Engine } from "src/engine";
 import { sineFactory } from "src/sources/Sine";
 import { gainFactory } from "src/volume/Gain";
+import { muteFactory } from "src/volume/Mute";
 import { noiseGateFactory } from "src/dynamics/NoiseGate";
 import { mixFactory } from "src/volume/Mix";
 
@@ -22,6 +23,10 @@ export default class Toolkit {
 
   get gain() {
     return gainFactory(this.engine);
+  }
+
+  get mute() {
+    return muteFactory(this.engine);
   }
 
   get noiseGate() {
