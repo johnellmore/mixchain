@@ -2,7 +2,7 @@ import { Engine } from "src/engine";
 import ChainNode from "src/ChainNode";
 import { SPL } from "src/units/spl";
 import { TimeInterval } from "src/units/time";
-import { Parameter } from "src/Parameter";
+import { Parameter } from "src/parameters";
 
 export function noiseGateFactory(engine) {
   return function (

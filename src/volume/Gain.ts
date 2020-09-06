@@ -1,7 +1,7 @@
 import { Engine } from "src/engine";
 import { SPL } from "src/units";
 import ChainNode from "src/ChainNode";
-import { Parameter, DecibelParameter } from "src/Parameter";
+import { Parameter, DecibelParameter } from "src/parameters";
 
 export function gainFactory(engine) {
   return function (spl: SPL) {

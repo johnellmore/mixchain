@@ -3,7 +3,7 @@ import { Engine } from "src/engine";
 import { html } from "htm/preact";
 import { Component } from "preact";
 import { useState, useCallback } from "preact/hooks";
-import { DecibelParameter, HertzParameter } from "src/Parameter";
+import { DecibelParameter, HertzParameter } from "src/parameters";
 
 function DecibelControl(props) {
   const param = props.param as DecibelParameter;
@@ -54,7 +54,6 @@ function HertzControl(props) {
     (event) => {
       const input = event.target as HTMLInputElement;
       const intervalVal = parseFloat(input.value);
-      console.log(intervalVal);
       setIntervalValue(intervalVal);
       const hz = intervalToFreq(intervalVal);
       param.value = hz;
