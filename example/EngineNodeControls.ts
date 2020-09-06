@@ -104,7 +104,8 @@ class NodeControls extends Component {
     const node: ChainNode = props.node;
     return html`
       <h2>${node.constructor.name}</h2>
-      ${node.params.map((param) => {
+      ${[...node.params.values()].map((param) => {
+        console.log(param);
         if (param.constructor === DecibelParameter) {
           return html`<${DecibelControl} param=${param} />`;
         } else if (param.constructor === HertzParameter) {

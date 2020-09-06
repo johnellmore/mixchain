@@ -11,5 +11,5 @@ export default abstract class ChainNode {
     this.node.connect(chainNode.node);
   }
 
-  abstract get params(): Parameter[];
+  abstract get params(): Map<String, Parameter>;
 }

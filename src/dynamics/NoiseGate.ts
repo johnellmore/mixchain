@@ -30,7 +30,7 @@ export class NoiseGate extends ChainNode {
     // TODO implement noise gate
   }
 
-  get params(): Parameter[] {
-    return [];
+  get params(): Map<String, Parameter> {
+    return new Map();
   }
 }

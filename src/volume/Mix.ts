@@ -19,7 +19,7 @@ export class Mix extends ChainNode {
     });
   }
 
-  get params(): Parameter[] {
-    return [];
+  get params(): Map<String, Parameter> {
+    return new Map();
   }
 }

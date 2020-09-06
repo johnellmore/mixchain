@@ -6,6 +6,9 @@ export abstract class Parameter {
   constructor(label: String) {
     this.label = label;
   }
+
+  abstract get value(): any;
+  abstract set value(newValue: any);
 }
 
 export class DecibelParameter extends Parameter {

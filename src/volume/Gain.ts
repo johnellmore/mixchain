@@ -18,7 +18,8 @@ export class Gain extends ChainNode {
     this.node.gain.value = spl.unityCoefficient();
   }
 
-  get params(): Parameter[] {
-    return [new DecibelParameter("Gain", this.node.gain)];
+  get params(): Map<String, Parameter> {
+    const list: Parameter[] = [new DecibelParameter("Gain", this.node.gain)];
+    return new Map(list.map((param) => [param.label, param]));
   }
 }

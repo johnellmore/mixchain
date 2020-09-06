@@ -1,7 +1,6 @@
 import { Engine } from "src/engine";
 import ChainNode from "src/ChainNode";
-import { Parameter, DecibelParameter } from "src/parameters";
-import { ToggleParameter } from "../parameters";
+import { Parameter, DecibelParameter, ToggleParameter } from "src/parameters";
 
 export function muteFactory(engine) {
   return function (muted: boolean) {
@@ -26,13 +25,14 @@ export class Mute extends ChainNode {
     this.node.gain.value = muted ? 0 : 1;
   }
 
-  get params(): Parameter[] {
-    return [
+  get params(): Map<String, Parameter> {
+    const list: Parameter[] = [
       new ToggleParameter(
         "Muted",
         () => this.muted,
         (newMute) => (this.muted = newMute)
       ),
     ];
+    return new Map(list.map((param) => [param.label, param]));
   }
 }

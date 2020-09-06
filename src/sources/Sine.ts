@@ -20,7 +20,10 @@ export class Sine extends ChainNode {
     this.node.start();
   }
 
-  get params(): Parameter[] {
-    return [new HertzParameter("Frequency", this.node.frequency)];
+  get params(): Map<String, Parameter> {
+    const list: Parameter[] = [
+      new HertzParameter("Frequency", this.node.frequency),
+    ];
+    return new Map(list.map((param) => [param.label, param]));
   }
 }
