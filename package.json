@@ -15,7 +15,7 @@
     "typescript": "^4.0.2"
   },
   "scripts": {
-    "build": "rollup -c",
+    "build-example": "rollup -c",
     "test": "echo \"Nope\"",
     "watch": "rollup -w -c"
   },
