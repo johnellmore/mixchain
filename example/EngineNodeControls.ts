@@ -3,7 +3,11 @@ import { Engine } from "src/engine";
 import { html } from "htm/preact";
 import { Component } from "preact";
 import { useState, useCallback } from "preact/hooks";
-import { DecibelParameter, HertzParameter } from "src/parameters";
+import {
+  DecibelParameter,
+  HertzParameter,
+  ToggleParameter,
+} from "src/parameters";
 
 function DecibelControl(props) {
   const param = props.param as DecibelParameter;
@@ -32,6 +36,24 @@ function DecibelControl(props) {
         onInput=${handleChange} />
       ${decibelValue.toFixed(2)} dB
     </label>
+  </div>`;
+}
+
+function ToggleControl(props) {
+  const param = props.param as ToggleParameter;
+  const [isOn, setIsOn] = useState(param.value);
+
+  const handleChange = useCallback(() => {
+    const newIsOn = !param.value;
+    param.value = newIsOn;
+    setIsOn(newIsOn);
+  }, [isOn]);
+
+  return html`<div>
+    ${param.label}
+    <br />
+    <button onClick=${handleChange}>Toggle</button>
+    ${isOn ? "ON" : "OFF"}
   </div>`;
 }
 
@@ -87,6 +109,8 @@ class NodeControls extends Component {
           return html`<${DecibelControl} param=${param} />`;
         } else if (param.constructor === HertzParameter) {
           return html`<${HertzControl} param=${param} />`;
+        } else if (param.constructor === ToggleParameter) {
+          return html`<${ToggleControl} param=${param} />`;
         } else {
           return html`<em>No param control available</em>`;
         }

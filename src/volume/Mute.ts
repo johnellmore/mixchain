@@ -15,18 +15,24 @@ export class Mute extends ChainNode {
   constructor(engine: Engine, muted: boolean) {
     super(engine);
     this.node = engine.audioContext.createGain();
-    this.setMuted(muted);
+    this.muted = muted;
   }
 
-  isMuted(): boolean {
+  get muted(): boolean {
     return this.node.gain.value === 0;
   }
 
-  setMuted(muted: boolean): void {
+  set muted(muted: boolean) {
     this.node.gain.value = muted ? 0 : 1;
   }
 
   get params(): Parameter[] {
-    return [new ToggleParameter("Muted", this.isMuted, this.setMuted)];
+    return [
+      new ToggleParameter(
+        "Muted",
+        () => this.muted,
+        (newMute) => (this.muted = newMute)
+      ),
+    ];
   }
 }
